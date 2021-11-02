@@ -2,7 +2,14 @@ const { Client } = require('discord.js');
 
 const client = new Client();
 
-const { Token, Welcome_Channel_Id } = require('./config.js');
+const {
+  Token,
+  Welcome_Channel_Id,
+  Hacker_Role,
+  Iste_Role,
+  Hacker_Id,
+  ISTE_Team_Id,
+} = require('./config.js');
 
 client.on('ready', () => {
   console.log(`Blaze Is Ready To Fly!\nTag: ${client.user.tag}`);
@@ -22,6 +29,42 @@ client.on('guildMemberAdd', async (member) => {
   return client.channels.cache.get(welcomeChannel).send({
     content: welcomeMessage,
   });
+});
+
+client.on('messageReactionAdd', (reaction, user) => {
+  const { name } = reaction.emoji;
+  const member = reaction.message.guild.members.cache.get(user.id);
+  if (reaction.message.id === `${Hacker_Role}`) {
+    switch (name) {
+      case '🔥':
+        member.roles.add(`${Hacker_Id}`);
+        break;
+    }
+  } else if (reaction.message.id === `${Iste_Role}`) {
+    switch (name) {
+      case '🍀':
+        member.roles.add(`${ISTE_Team_Id}`);
+        break;
+    }
+  }
+});
+
+client.on('messageReactionRemove', (reaction, user) => {
+  const { name } = reaction.emoji;
+  const member = reaction.message.guild.members.cache.get(user.id);
+  if (reaction.message.id === `${Hacker_Role}`) {
+    switch (name) {
+      case '🔥':
+        member.roles.remove(`${Hacker_Id}`);
+        break;
+    }
+  } else if (reaction.message.id === `${Iste_Role}`) {
+    switch (name) {
+      case '🍀':
+        member.roles.remove(`${ISTE_Team_Id}`);
+        break;
+    }
+  }
 });
 
 client
