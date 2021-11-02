@@ -6,6 +6,7 @@ const config = {
   Token: process.env.DISCORD_BOT_TOKEN,
   Welcome_Channel_Id: process.env.WELCOME_CHANNEL,
   Get_Start_Channel_Id: process.env.GET_START_CHANNEL,
+  Announcement_Channel_Id: process.env.ANNOUNCEMENT_CHANNEL,
   Hacker_Role: process.env.HACKER_ROLE,
   Iste_Role: process.env.ISTE_ROLE,
   Hacker_Id: process.env.HACKER_ID,
